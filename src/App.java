@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
+import DataStructure.CQueue;
 import DataStructure.Linkedlist;
 import DataStructure.Queue;
 import DataStructure.Stack;
+import DataStructure.Deque;
 
 public class App {
     public static void main(String[] args) {
@@ -13,16 +15,20 @@ public class App {
             System.out.println("Main Menu:");
             System.out.println("1. Linked List");
             System.out.println("2. Stack");
-            System.out.println("3. Queue"); 
-            System.out.println("4. Exit");
+            System.out.println("3. Queue");
+            System.out.println("4. Circular Queue");
+            System.out.println("5. Dequeue");
+            System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> linkedListMenu(scanner);
                 case 2 -> stackMenu(scanner);
-                case 3 -> queueMenu(scanner); 
-                case 4 -> {
+                case 3 -> queueMenu(scanner);
+                case 4 -> cqueueMenu(scanner);
+                case 5 -> dqueue(scanner);
+                case 6 -> {
                     System.out.println("Exiting...");
                     System.exit(0);
                 }
@@ -30,6 +36,56 @@ public class App {
             }
         }
         scanner.close();
+    }
+
+    private static void dqueue(Scanner scanner) {
+        Deque deque = new Deque(5);
+        boolean running = true;
+        while (running) {
+            System.out.println("\nDequeue Menu:");
+            System.out.println("1. Insert First");
+            System.out.println("2. Remove First");
+            System.out.println("3. Insert Last");
+            System.out.println("4. Remove Last");
+            System.out.println("5. Print Dequeue");
+            System.out.println("6. Back to Main Menu");
+            System.out.println("7. Exit");
+            System.out.print("Choose an option: ");
+            System.out.println();
+
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("Enter value to add into Dequeue at Front of dequeue:");
+                    deque.insertFirst(scanner.nextInt());
+                }
+                case 2 -> {
+                    try {
+                        System.out.println("Delete value from first position of Dequeue: " + deque.deleteFirst());
+                    } catch (Exception e) {
+                        System.out.println("Dequeue is empty.");
+                    }
+                }
+                case 3 -> {
+                    System.out.println("Enter value to add into Dequeue  at Last of dequeue:");
+                    deque.insertLast(scanner.nextInt());
+                }
+                case 4 -> {
+                    try {
+                        System.out.println("Delete value from Last position of Dequeue: " + deque.deleteLast());
+                    } catch (Exception e) {
+                        System.out.println("Dequeue is empty.");
+                    }
+                }
+                case 5 -> deque.display();
+                case 6 -> running = false;
+                case 7 -> {
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice, please try again.");
+            }
+        }
     }
 
     private static void stackMenu(Scanner scanner) {
@@ -192,6 +248,50 @@ public class App {
                 case 5 -> System.out.println(queue.size());
                 case 6 -> running = false;
                 case 7 -> {
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice, please try again.");
+            }
+        }
+    }
+
+    private static void cqueueMenu(Scanner scanner) {
+        CQueue cqueue = new CQueue(5);
+        boolean running = true;
+        while (running) {
+            System.out.println("\nCircular Queue Menu:");
+            System.out.println("1. Insert Element");
+            System.out.println("2. Remove Element");
+            System.out.println("3. Front Element");
+            System.out.println("4. Print Circular Queue");
+            System.out.println("5. Back to Main Menu");
+            System.out.println("6. Exit");
+            System.out.println();
+
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter value to insert into queue: ");
+                    cqueue.enqueue(scanner.nextInt());
+                }
+                case 2 -> {
+                    try {
+                        System.out.println("Removed value: " + cqueue.dequeue());
+                    } catch (Exception e) {
+                        System.out.println("Queue is empty.");
+                    }
+                }
+                case 3 -> {
+                    try {
+                        System.out.println("Front value: " + cqueue.frontValue());
+                    } catch (Exception e) {
+                        System.out.println("Queue is empty.");
+                    }
+                }
+                case 4 -> cqueue.display();
+                case 5 -> running = false;
+                case 6 -> {
                     System.out.println("Exiting...");
                     System.exit(0);
                 }
