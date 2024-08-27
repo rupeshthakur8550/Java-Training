@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
+import DataStructure.CLinkedList;
 import DataStructure.CQueue;
+import DataStructure.DLinkedList;
 import DataStructure.Linkedlist;
 import DataStructure.Queue;
 import DataStructure.Stack;
@@ -14,21 +16,25 @@ public class App {
         while (running) {
             System.out.println("Main Menu:");
             System.out.println("1. Linked List");
-            System.out.println("2. Stack");
-            System.out.println("3. Queue");
-            System.out.println("4. Circular Queue");
-            System.out.println("5. Dequeue");
-            System.out.println("6. Exit");
+            System.out.println("2. Doubly LinkedList");
+            System.out.println("3. Circular Linked List");
+            System.out.println("4. Stack");
+            System.out.println("5. Queue");
+            System.out.println("6. Circular Queue");
+            System.out.println("7. Dequeue");
+            System.out.println("8. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> linkedListMenu(scanner);
-                case 2 -> stackMenu(scanner);
-                case 3 -> queueMenu(scanner);
-                case 4 -> cqueueMenu(scanner);
-                case 5 -> dqueue(scanner);
-                case 6 -> {
+                case 2 -> DlinkedListMenu(scanner);
+                case 3 -> ClinkedListMenu(scanner);
+                case 4 -> stackMenu(scanner);
+                case 5 -> queueMenu(scanner);
+                case 6 -> cqueueMenu(scanner);
+                case 7 -> dqueue(scanner);
+                case 8 -> {
                     System.out.println("Exiting...");
                     System.exit(0);
                 }
@@ -202,6 +208,136 @@ public class App {
                 case 9 -> demo.clear();
                 case 10 -> running = false;
                 case 11 -> {
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice, please try again.");
+            }
+        }
+    }
+
+    private static void DlinkedListMenu(Scanner scanner) {
+        DLinkedList demo = new DLinkedList();
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\nDoubly Linked List Menu:");
+            System.out.println("1. Insert First");
+            System.out.println("2. Insert Last");
+            System.out.println("3. Insert at index i");
+            System.out.println("4. Remove First");
+            System.out.println("5. Remove Last");
+            System.out.println("6. Remove Value");
+            System.out.println("7. Print List");
+            System.out.println("8. Doubly LinkedList Size");
+            System.out.println("9. Back to Main Menu");
+            System.out.println("10. Exit");
+            System.out.print("Choose an option: ");
+            System.out.println();
+
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter value to insert at the beginning: ");
+                    int valueFirst = scanner.nextInt();
+                    demo.insertFirst(valueFirst);
+                }
+                case 2 -> {
+                    System.out.print("Enter value to insert at the end: ");
+                    int valueLast = scanner.nextInt();
+                    demo.insertLast(valueLast);
+                }
+                case 3 -> {
+                    System.out.print("Enter value to insert at index i (First specify value then space then index): ");
+                    demo.insertAtIndexI(scanner.nextInt(), scanner.nextInt());
+                    System.out.println("Value added at entered index.");
+                }
+                case 4 -> {
+                    try {
+                        demo.removeFirst();
+                        System.out.println("First element removed.");
+                    } catch (Exception e) {
+                        System.out.println("List is empty.");
+                    }
+                }
+                case 5 -> {
+                    try {
+                        demo.removeLast();
+                        System.out.println("Last element removed.");
+                    } catch (Exception e) {
+                        System.out.println("List is empty.");
+                    }
+                }
+                case 6 -> {
+                    System.out.print("Enter index to remove: ");
+                    int value = scanner.nextInt();
+                    boolean removed = demo.removeAtindexI(value) != null;
+                    if (removed) {
+                        System.out.println("Value removed.");
+                    } else {
+                        System.out.println("Value not found.");
+                    }
+                }
+                case 7 -> demo.PrintDList();
+                case 8 -> System.out.println("Size of the list: " + demo.size());
+                case 9 -> running = false;
+                case 10 -> {
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice, please try again.");
+            }
+        }
+    }
+
+    private static void ClinkedListMenu(Scanner scanner) {
+        CLinkedList cLinkedList = new CLinkedList();
+        boolean running = true;
+        while(running){
+            System.out.println("\nCircular Linked List Menu:");
+            System.out.println("1. Insert First");
+            System.out.println("2. Insert Last");
+            System.out.println("3. Remove First");
+            System.out.println("4. Remove Last");
+            System.out.println("5. Print List");
+            System.out.println("6. Circular LinkedList Size");
+            System.out.println("7. Back to Main Menu");
+            System.out.println("8. Exit");
+            System.out.print("Choose an option: ");
+            System.out.println(); 
+
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter value to insert at the beginning: ");
+                    int valueFirst = scanner.nextInt();
+                    cLinkedList.insertFirst(valueFirst);
+                }
+                case 2 -> {
+                    System.out.print("Enter value to insert at the end: ");
+                    int valueLast = scanner.nextInt();
+                    cLinkedList.insertLast(valueLast);
+                }
+                case 3 -> {
+                    try {
+                        cLinkedList.removeFirst();
+                        System.out.println("First element removed.");
+                    } catch (Exception e) {
+                        System.out.println("List is empty.");
+                    }
+                }
+                case 4 -> {
+                    try {
+                        cLinkedList.removeLast();
+                        System.out.println("Last element removed.");
+                    } catch (Exception e) {
+                        System.out.println("List is empty.");
+                    }
+                }
+                case 5 -> cLinkedList.PrintCList();
+                case 6 -> System.out.println("Size of the list: " + cLinkedList.size());
+                case 7 -> running = false;
+                case 8 -> {
                     System.out.println("Exiting...");
                     System.exit(0);
                 }
