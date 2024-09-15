@@ -10,9 +10,10 @@ public class Subsequent {
     }
 
     public static int subsequence(String S, int K) {
+        int result = -404;
         Set<Integer> validSubsequences = new HashSet<>();
         generateSubsequences(S, "", K, validSubsequences);
-        return validSubsequences.size();
+        return validSubsequences.size() != 0 ? validSubsequences.size() : result;
     }
 
     private static void generateSubsequences(String str, String current, int k, Set<Integer> validSubsequences) {
